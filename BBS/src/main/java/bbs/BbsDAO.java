@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import helper.Dbinfo;
+
 public class BbsDAO {
 
 	private Connection conn;
@@ -14,10 +16,10 @@ public class BbsDAO {
 	//기본 생성자
 	public BbsDAO() {
 		try {
-			String dbURL = "jdbc:mariadb://localhost:3306/bbs";
-			String dbID = "root";
-			String dbPassword = "kosmo1234";
-			Class.forName("org.mariadb.jdbc.Driver");
+			String dbURL = Dbinfo.dbURL;
+			String dbID = Dbinfo.dbID;
+			String dbPassword = Dbinfo.dbPassword;
+			Class.forName(Dbinfo.ClassforName);
 			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -164,6 +166,22 @@ public class BbsDAO {
 			e.printStackTrace();
 		}
 		return -1; //데이터베이스 오류 
+	}
+	
+	// 프린트기능추가
+	public String print_title() {
+		Bbs bbs = new Bbs();
+		return bbs.getBbsTitle();
+	}
+
+	public String print_author() {
+		Bbs bbs = new Bbs();
+		return bbs.getUserID();
+	}
+
+	public String print_content() {
+		Bbs bbs = new Bbs();
+		return bbs.getBbsContent();
 	}
 	
 }

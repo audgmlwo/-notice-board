@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import helper.Dbinfo;
+
 public class UserDAO {
 
 	private Connection conn; // 자바와 데이터베이스를 연결
@@ -16,10 +18,10 @@ public class UserDAO {
 	// 메소드마다 반복되는 코드를 이곳에 넣으면 코드가 간소화된다
 	public UserDAO() {
 		try {
-			String dbURL = "jdbc:mariadb://localhost:3306/bbs";
-			String dbID = "root";
-			String dbPassword = "kosmo1234";
-			Class.forName("org.mariadb.jdbc.Driver");
+			String dbURL = Dbinfo.dbURL;
+			String dbID = Dbinfo.dbID;
+			String dbPassword = Dbinfo.dbPassword;
+			Class.forName(Dbinfo.ClassforName);
 			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,4 +65,10 @@ public class UserDAO {
 		  }
 		  return -1;
 		}
+		// 프린트 기능 추가
+		public void plint() {
+			System.out.println("프린트 기능잘됨");
+		}
+	
+	
 }
